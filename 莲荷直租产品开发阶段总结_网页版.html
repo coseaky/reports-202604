@@ -1,0 +1,537 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>莲荷直租产品开发阶段总结 - 网页版</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/github-markdown-css/5.2.0/github-markdown.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/github.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
+            line-height: 1.6;
+            color: #24292e;
+            background-color: #f6f8fa;
+            padding: 20px;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            overflow: hidden;
+        }
+        .header {
+            background: linear-gradient(135deg, #1a365d 0%, #2d3748 100%);
+            color: white;
+            padding: 2.5rem 2rem;
+            text-align: center;
+        }
+        .header h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+        .header .subtitle {
+            font-size: 1.25rem;
+            opacity: 0.9;
+            margin-bottom: 0.5rem;
+        }
+        .header .date {
+            font-size: 0.95rem;
+            opacity: 0.75;
+        }
+        .nav {
+            background: #f8f9fa;
+            padding: 1rem 2rem;
+            border-bottom: 1px solid #e1e4e8;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+        .nav-title {
+            font-weight: 600;
+            color: #1a365d;
+        }
+        .nav-links {
+            display: flex;
+            gap: 1.5rem;
+        }
+        .nav-links a {
+            color: #0366d6;
+            text-decoration: none;
+            font-size: 0.95rem;
+            padding: 0.25rem 0.5rem;
+            border-radius: 4px;
+            transition: background-color 0.2s;
+        }
+        .nav-links a:hover {
+            background-color: #f0f4f8;
+        }
+        .content {
+            padding: 2.5rem;
+        }
+        .markdown-body {
+            font-size: 16px;
+            line-height: 1.7;
+        }
+        .markdown-body table {
+            font-size: 14px;
+            border-collapse: collapse;
+            width: 100%;
+            margin: 1.5rem 0;
+        }
+        .markdown-body th {
+            background-color: #f6f8fa;
+            font-weight: 600;
+        }
+        .markdown-body th,
+        .markdown-body td {
+            border: 1px solid #e1e4e8;
+            padding: 0.75rem 1rem;
+            text-align: left;
+        }
+        .markdown-body tr:nth-child(even) {
+            background-color: #fafbfc;
+        }
+        .markdown-body h1,
+        .markdown-body h2,
+        .markdown-body h3 {
+            border-bottom: 1px solid #eaecef;
+            padding-bottom: 0.3em;
+            margin-top: 1.8em;
+            margin-bottom: 0.8em;
+        }
+        .markdown-body h1 {
+            color: #1a365d;
+        }
+        .markdown-body h2 {
+            color: #2d3748;
+        }
+        .markdown-body blockquote {
+            border-left: 4px solid #0366d6;
+            background-color: #f0f7ff;
+            padding: 1rem;
+            margin: 1.5rem 0;
+            border-radius: 0 6px 6px 0;
+        }
+        .markdown-body hr {
+            height: 2px;
+            background-color: #eaecef;
+            border: none;
+            margin: 2rem 0;
+        }
+        .footer {
+            background: #f8f9fa;
+            padding: 1.5rem 2rem;
+            border-top: 1px solid #e1e4e8;
+            text-align: center;
+            color: #6a737d;
+            font-size: 0.9rem;
+        }
+        .status-badge {
+            display: inline-block;
+            padding: 0.2rem 0.6rem;
+            border-radius: 12px;
+            font-size: 0.85rem;
+            font-weight: 500;
+            margin-right: 0.5rem;
+        }
+        .status-completed {
+            background-color: #dcffe4;
+            color: #0c6b3d;
+        }
+        .status-ongoing {
+            background-color: #fff8c5;
+            color: #7d4e00;
+        }
+        .status-pending {
+            background-color: #f1f8ff;
+            color: #0356a6;
+        }
+        @media (max-width: 768px) {
+            .header {
+                padding: 2rem 1rem;
+            }
+            .header h1 {
+                font-size: 2rem;
+            }
+            .content {
+                padding: 1.5rem;
+            }
+            .nav {
+                flex-direction: column;
+                gap: 1rem;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>莲荷直租产品开发阶段总结</h1>
+            <div class="subtitle">产品迭代、业务演进与关键决策</div>
+            <div class="date">2025年5月 - 2026年4月 | 最后更新：2026-04-17</div>
+        </div>
+
+        <div class="nav">
+            <div class="nav-title">📄 文档导航</div>
+            <div class="nav-links">
+                <a href="#产品概况">产品概况</a>
+                <a href="#产品迭代时间线">迭代时间线</a>
+                <a href="#支付体系演进">支付体系</a>
+                <a href="#需求池与进度">需求进度</a>
+                <a href="#关键业务规则备忘">业务规则</a>
+                <a href="#开发规划">未来规划</a>
+            </div>
+        </div>
+
+        <div class="content">
+            <div class="markdown-body" id="markdown-content">
+                <!-- Markdown content will be inserted here by JavaScript -->
+            </div>
+        </div>
+
+        <div class="footer">
+            <p>本文档基于2025年5月至2026年4月实际运营资料整理</p>
+            <p>© 2026 莲荷直租平台 | 商务简练风格网页版</p>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script>
+    <script>
+        // Markdown content
+        const markdownContent = `# 莲荷直租产品开发阶段总结
+
+> 本文档梳理莲荷直租平台（原蜜租X）自2025年5月至2026年4月的产品迭代、业务演进与关键决策，呈现平台从起步到品牌升级的完整发展路径。
+
+---
+
+## 一、产品概况
+
+### 1.1 品牌演变
+
+| 阶段 | 时间 | 说明 |
+|------|------|------|
+| 双端并行 | 2025.05 - 2026.01 | 租客端（蜜租X）与运营端（蜜租X运营端）独立运营 |
+| 合并决策 | 2026.01.14 | 为集中开发资源、提升用户体验，决定合并为单一小程序 |
+| 品牌升级 | 2026.03.11 | 莲荷直租 V2.0.0 正式上线，完成双端合并，同步更新品牌标识 |
+
+### 1.2 平台角色体系
+
+| 角色 | 入驻方式 | 核心功能 |
+|------|---------|---------|
+| 租客 | 小程序注册 | 找房、签约、支付账单 |
+| 房东 | 线上签约入驻 | 提供房源，签订联合租房东合同，接收分账 |
+| 装修投资人 | 线上签约入驻 | 签订联合租投资人合同，接收分账 |
+| 推荐人 | 自助入驻 | 带看成交获取佣金，接收分账 |
+| 管家 | 平台后台设置 | 代表平台与房东、投资人签约，管理房源与合同 |
+| 平台 | — | 收取技术服务费（3%） |
+
+**关键设计：** 支持单用户多角色权限叠加，例如房东可同时担任投资人。
+
+---
+
+## 二、产品迭代时间线
+
+### 2.1 小程序版本历程
+
+#### 阶段零：平台起步（2025年5月）
+
+**蜜租X（租客端）v1.0.0 — 2025-05-25**
+
+| 核心功能 | 说明 |
+|---------|------|
+| 用户登录注册 | 微信授权登录、手机号绑定 |
+| 浏览房源 | 查看在租房源列表与详情 |
+| 在线签约 | 租客在线签署租房合同 |
+| 支付账单 | 租金/押金在线支付 |
+| 查看账单 | 历史账单与待支付账单查看 |
+| 我的合同 | 已签合同与合同详情查看 |
+| 个人中心 | 实名认证与个人信息管理 |
+
+**蜜租X运营端 v1.0.0 — 2025-05-25**
+
+| 核心功能 | 说明 |
+|---------|------|
+| 管家登录 | 管家账号登录运营端 |
+| 房源管理 | 房源新增/编辑/上下架 |
+| 合同管理 | 创建与管理联合租合同 |
+| 租客管理 | 查看租客信息与签约状态 |
+| 账单管理 | 生成账单、查看支付状态 |
+| 分账管理 | 查看分账记录与状态 |
+| 我的钱包 | 管家收益查看与提现 |
+| 房东/投资人管理 | 查看房东/投资人信息（初期线下配置） |
+
+**起点：** 2025年5月25日，蜜租X双端小程序同步上线，标志着平台正式运营。租客端覆盖找房至签约支付闭环，运营端支撑管家日常管理，为后续业务扩展奠定基础。
+
+---
+
+#### 第一阶段：基础功能搭建（v1.1.0 - v1.2.1）
+
+| 版本 | 小程序 | 日期 | 核心功能 | 备注 |
+|------|--------|------|---------|------|
+| v1.1.0 | 运营端 | 2025-08-04 | 收益涨幅计算修复、功能文案优化 | 业务端确认需求 |
+| v1.1.0 | 运营端 | 2025-08-04 → 08-06 | **联合租计算器上线** | 便于管家快速估算分账方案 |
+| v1.2.0 | 运营端 | 2025-08-18 → 08-25 | 管家联合租合同管理、**房东/投资人线上签约入驻** | 核心签约流程线上化 |
+| v1.2.1 | 运营端 | 2025-09-19 | 分享页面返回优化、图片显示修复 | 体验问题修复 |
+
+**本阶段重点：** 联合租计算器验证分账模型；房东与投资人实现线上签约入驻，替代线下配置。
+
+**经验：** 线下手动配置易出错，决定全面推行线上签约。
+
+---
+
+#### 第二阶段：角色扩展与流程完善（v1.3.0 - v1.5.0）
+
+| 版本 | 小程序 | 日期 | 核心功能 | 备注 |
+|------|--------|------|---------|------|
+| v1.3.0 | 运营端 | 2025-10-16 | **推荐人模块**：自助入驻、认领房源、推广分享 | 无需后台配置 |
+| v1.4.2 | 运营端 | 2025-12-28 | 联合租合同绑定纸质合同、房源排序/筛选、前期不分账信息展示 | 前期不分账逻辑同步 |
+| v1.5.0 | 运营端 | 2026-01-27 | **授权委托协议签约流程** | 解决产权人与签约房东不一致的问题 |
+
+**本阶段重点：** 推荐人角色上线，渠道合作启动；前期不分账复杂分账逻辑落地；授权委托协议流程完善。
+
+**业务规则明确：**
+- 企业主体签约需**公章+法人/授权代表签字**
+- 推荐人采用自助入驻
+- 产权人与签约房东不一致时需先创建授权委托协议
+
+---
+
+#### 第三阶段：品牌升级与双端合并（v2.0.0 - v2.1.0）
+
+| 版本 | 日期 | 核心功能 | 备注 |
+|------|------|---------|------|
+| v2.0.0 | 2026-03-09 → 03-11 | **双端合并为莲荷直租**、首页UI改版 | 里程碑版本 |
+| v2.1.0 | 2026-03-17 | 租好房/联合租Tab顶部UI样式调整 | 搜索筛选功能暂未开放 |
+
+**页面映射关系：**
+
+| 原页面 | 新页面 |
+|-------|-------|
+| 蜜租X-首页 | 租好房 |
+| 蜜租X运营端-联合租 | 我的-房源管理 |
+| 蜜租X-服务 + 运营端-服务 | 首页（全新设计） |
+| — | 我的（新增：房源管理、我的账单） |
+
+**租客迁移：** 新小程序授权登录，无需重新实名认证，历史数据自动同步。
+
+---
+
+#### 第四阶段：权限体系与后台管理（v2.2.0 + 后台v2.0.0）
+
+| 版本 | 日期 | 核心功能 | 备注 |
+|------|------|---------|------|
+| 小程序 v2.2.0 | 2026-04-16 | 投资人企业成员管理 | 企业管理员可在小程序端操作 |
+| 运营后台 v2.0.0 | 2026-04-16 | 账单管理、分账管理、用户管理、**RBAC权限体系**、管家权限隔离 | 配套操作手册 v20260411 |
+
+---
+
+### 2.2 运营后台（PC-Web）版本历程
+
+| 版本 | 日期 | 核心功能 |
+|------|------|---------|
+| v1.0.0 | 2025-11-20 | 框架、账号、房源管理、小区管理 |
+| v2.0.0 | 2026-04-16 | 账单管理、分账管理、用户管理、RBAC权限体系、管家权限隔离 |
+
+**测试环境：** https://devapi.geizhu.miroom.cc/admin/
+**正式环境：** https://xapi.miroom.cc/admin
+
+---
+
+### 2.3 RBAC角色体系（运营后台 v2.0.0）
+
+| 角色 | 权限范围 |
+|------|---------|
+| 超级管理员 | 所有权限 |
+| 财务人员 | 查看账单、分账 |
+| 后台管家 | 查看自己创建/关联的房源、账单、分账 |
+| 企业管理员 | 小程序成员管理 |
+| 企业成员 | 查看本企业相关数据 |
+
+**关键设计：** 管家权限按房源维度隔离，数据安全可控。
+
+---
+
+## 三、支付体系演进
+
+### 3.1 关键事件时间线
+
+| 时间 | 事件 | 处理方案 |
+|------|------|---------|
+| 2025-09-30 | 支付通道风控触发 | 临时切换商户号 |
+| 2025-10-07 | 支付失败 | 账单切换至代付备选方案 |
+| 2026-02-25 | 商户号申诉通过 | 风控商户号疑为当时切错 |
+| 2026-02-26 | 切回线上稳定商户号 | 支付功能恢复 |
+| 2026-03-15 | 莲荷直租支付失败 | 公司工商变更导致小程序主体与支付主体不一致 |
+| 2026-03-17 | 易宝切换新商户号测试 | 商户号861071754提交申诉 |
+| 2026-04 | 申诉成功 | 线上通道恢复，业务正常支付 |
+
+### 3.2 主体变更流程（解决03-15问题）
+
+1. 公司对公户银行变更名称
+2. 易宝变更单盖章
+3. 易宝后台提交主体名称变更申请
+4. 重新绑定小程序appid
+5. 测试支付
+
+### 3.3 押金结算方案
+
+**当前方案：** 押金使用单独子商户号收款，直接结算给房东。退款时，房东支付押金退款账单，根据退租定损情况分账退款。
+
+| 环节 | 规则 |
+|------|------|
+| **押金收款** | 租客支付 → 押金子商户号收款 → 直接结算给房东 |
+| **正常退租** | 管家提交退租 → 房东账单生成 → 房东付款 → 系统退租客 |
+| **违约退租** | 管家扣定损后剩余 → 房东账单生成 → 房东付款 → 系统退租客（定损金额分账给管家） |
+
+**商户号分设：** 押金与租金商户号分开，互不影响。
+
+**待优化：** 收款环节手续费可能导致付款余额不足，需等押金池充足时再次支付。
+
+---
+
+## 四、合同模板演进
+
+| 时间 | 更新内容 | 关联功能 |
+|------|---------|---------|
+| 2025-09-17 | 个人房东合同模板简化版上线 | — |
+| 2025-11-26 | 房东前期不分账条款配套修改 | 前期不分账功能开发中 |
+| 2025-12-03 | 房东前期不分账合同模板确认待上线 | v1.4.2 配套 |
+| 已完成 | 品牌/公司名/公章变更 | 双端合并后配套 |
+
+---
+
+## 五、消息通知体系
+
+| 阶段 | 方式 | 覆盖场景 |
+|------|------|---------|
+| 2025-11-23 上线 | 短信 | 支付后分账进度通知、签约通知、缴费提醒、合同创建通知 |
+| 2026-04-14 上线 | 后台通知 | 逾期提醒、催缴提醒、管家跟进提醒 |
+| 当前 | 短信推送 | 暂代微信服务通知 |
+| 待开通 | 微信服务通知 | 需服务号运营后申请开通 |
+| 待开通 | 公众号推送 | 结算到账通知 |
+
+**经验：** 短信通知可能因运营商审核导致下发延迟或被拦截。
+
+---
+
+## 六、需求池与进度
+
+### 6.1 当前状态（截至2026-04-17）
+
+| 序号 | 需求 | 状态 | 完成方式/说明 |
+|------|------|------|-------------|
+| 1 | 支付通道申诉和恢复 | <span class="status-badge status-completed">✅ 已完成</span> | 申诉成功，线上通道正常 |
+| 2 | 投资人企业用户成员管理 | <span class="status-badge status-completed">✅ 已完成</span> | 小程序 v2.2.0 |
+| 3 | 管家权限按房源维度隔离 | <span class="status-badge status-completed">✅ 已完成</span> | 运营后台 v2.0.0 |
+| 4 | 财务权限：账单/分账数据导出 | <span class="status-badge status-completed">✅ 已完成</span> | 运营后台 v2.0.0 |
+| 5 | 逾期提醒/催缴提醒/提醒管家跟进通知 | <span class="status-badge status-completed">✅ 已完成</span> | 2026-04-14后台更新 |
+| 6 | 服务通知 | <span class="status-badge status-ongoing">⏳ 部分完成</span> | 暂用短信推送；微信服务通知待申请 |
+| 7 | 押金收款/退租退款流程 | <span class="status-badge status-ongoing">⏳ 已上线待优化</span> | 按最新业务规则处理；手续费问题待优化 |
+| 8 | 运营后台账单/分账管理 | <span class="status-badge status-completed">✅ 已完成</span> | 运营后台 v2.0.0 |
+| 9 | 公众号推送结算到账通知 | <span class="status-badge status-pending">📋 待排期</span> | — |
+| 10 | 维修计算器 | <span class="status-badge status-completed">✅ 已完成</span> | 网页H5版本 |
+| 11 | 合同模板更新（品牌/公章） | <span class="status-badge status-completed">✅ 已完成</span> | — |
+
+### 6.2 完成度统计
+
+- <span class="status-badge status-completed">✅ 已完成：8项</span>
+- <span class="status-badge status-ongoing">⏳ 已上线待优化/部分完成：2项</span>
+- <span class="status-badge status-pending">📋 待排期：1项</span>
+
+---
+
+## 七、关键业务规则备忘
+
+| 类别 | 规则 |
+|------|------|
+| 签约规范 | 企业主体签约需公章+法人/授权代表签字 |
+| 推荐人 | 自助入驻，佣金仅首期租金参与 |
+| 线上优先 | 全面推行线上签约入驻，避免线下配置出错 |
+| 委托协议 | 产权人与签约房东不一致时需先创建授权委托协议 |
+| 多角色 | 单用户支持多角色权限叠加 |
+| 手动修改 | 管家换手机号/银行卡换绑需技术手动修改 |
+| 地址匹配 | 身份证地址模糊匹配算法兼容行政区划变更 |
+
+---
+
+## 八、开发规划（v3.2+）
+
+### 8.1 运营后台（PC-Web）
+
+逐步完善运营维护功能，主要规划模块：
+
+| 模块 | 说明 |
+|------|------|
+| 合同管理 | 各类合同的查看/作废/重签 |
+| 财务报表 | 分账数据统计与导出 |
+| 账单处理 | 账单作废、逾期管理 |
+| 退租处理 | 退租流程、押金结算与退款 |
+
+### 8.2 小程序端
+
+逐步完善租客体验及业务功能，主要规划方向：
+
+| 方向 | 说明 |
+|------|------|
+| 租客体验 | 预定房间、收藏房源、开具发票等 |
+| 支付优化 | 支持多种支付方式、代付功能 |
+| 房源管理 | 管家小程序端新增房源、产权证上传、逾期标签展示 |
+| 业务规则 | 管家服务费比例自定义、推荐人角色限制取消、退租押金结算优化 |
+| 权限体系 | 小程序端超管角色 |
+
+---
+
+*本文档基于2025年5月至2026年4月实际运营资料整理，最后更新：2026-04-17*`;
+
+        // Configure marked
+        marked.setOptions({
+            breaks: true,
+            gfm: true,
+            highlight: function(code, lang) {
+                if (lang && hljs.getLanguage(lang)) {
+                    return hljs.highlight(code, { language: lang }).value;
+                }
+                return code;
+            }
+        });
+
+        // Render markdown
+        document.getElementById('markdown-content').innerHTML = marked.parse(markdownContent);
+
+        // Update status badges after render
+        document.querySelectorAll('.status-badge').forEach(badge => {
+            if (badge.textContent.includes('✅')) {
+                badge.classList.add('status-completed');
+            } else if (badge.textContent.includes('⏳')) {
+                badge.classList.add('status-ongoing');
+            } else if (badge.textContent.includes('📋')) {
+                badge.classList.add('status-pending');
+            }
+        });
+
+        // Smooth scroll for navigation
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href').substring(1);
+                const targetElement = document.getElementById(targetId);
+                if (targetElement) {
+                    targetElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
